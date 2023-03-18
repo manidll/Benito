@@ -4,8 +4,11 @@
  */
 package mx.itson.benitoc.ui;
 
+import java.awt.Color;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.OrdenCompra;
@@ -38,6 +41,13 @@ public class OrdenCompraListado extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTotal = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnAbrir = new javax.swing.JMenu();
+        btnArticulos = new javax.swing.JMenuItem();
+        btnProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -48,17 +58,20 @@ public class OrdenCompraListado extends javax.swing.JFrame {
 
         tblOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Folio", "Observacion", "Fecha", "Proveedor", "Articulo", "Precio", "Carrito"
+                "Id", "Folio", "Observacion", "Fecha", "Proveedor", "Articulo", "Precio", "Carrito", "Total", "Estado"
             }
         ));
+        tblOrden.setGridColor(new java.awt.Color(0, 51, 153));
         jScrollPane1.setViewportView(tblOrden);
 
+        btnAgregar.setBackground(new java.awt.Color(0, 102, 204));
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +79,8 @@ public class OrdenCompraListado extends javax.swing.JFrame {
             }
         });
 
+        btnEditar.setBackground(new java.awt.Color(0, 102, 204));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +88,8 @@ public class OrdenCompraListado extends javax.swing.JFrame {
             }
         });
 
+        btnEliminar.setBackground(new java.awt.Color(0, 102, 204));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,34 +97,84 @@ public class OrdenCompraListado extends javax.swing.JFrame {
             }
         });
 
+        tblTotal.setBackground(new java.awt.Color(0, 102, 204));
+        tblTotal.setForeground(new java.awt.Color(255, 255, 255));
+        tblTotal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Total a pagar"
+            }
+        ));
+        jScrollPane2.setViewportView(tblTotal);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx/itson/benito/icon/michelin.png"))); // NOI18N
+
+        btnAbrir.setText("Abrir");
+
+        btnArticulos.setText("Articulos");
+        btnArticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArticulosActionPerformed(evt);
+            }
+        });
+        btnAbrir.add(btnArticulos);
+
+        btnProveedores.setText("Proveedores");
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedoresActionPerformed(evt);
+            }
+        });
+        btnAbrir.add(btnProveedores);
+
+        jMenuBar1.add(btnAbrir);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
-                .addGap(42, 42, 42)
-                .addComponent(btnEditar)
-                .addGap(43, 43, 43)
-                .addComponent(btnEliminar)
-                .addGap(89, 89, 89))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1247, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregar)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnEditar)
+                        .addGap(43, 43, 43)
+                        .addComponent(btnEliminar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 85, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnAgregar))
-                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEditar)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnAgregar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,11 +189,13 @@ public class OrdenCompraListado extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        cargarTable();    
+    tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
     
     }//GEN-LAST:event_formWindowOpened
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
      
+       
        int seleccion;
        seleccion = tblOrden.getSelectedRow();
        if(seleccion == -1){
@@ -163,31 +232,57 @@ public class OrdenCompraListado extends javax.swing.JFrame {
       
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticulosActionPerformed
+        ArticuloListado obj = new ArticuloListado();
+        obj.setVisible(true);
+        obj.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnArticulosActionPerformed
+
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        ProveedorListado obj = new ProveedorListado();
+        obj.setVisible(true);
+        obj.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnProveedoresActionPerformed
 public void cargarTable(){
     
      List<OrdenCompra> i = OrdenCompraDAO.obtenerTodos();
          DefaultTableModel modelo =(DefaultTableModel)tblOrden.getModel();
-         SimpleDateFormat formatter = new SimpleDateFormat( "dd-MMMM-yyyy"); 
+         Locale local = new Locale("es", "MX");
+         NumberFormat formatoCantidad = NumberFormat.getCurrencyInstance(local);
+         SimpleDateFormat formatter = new SimpleDateFormat( "dd 'de' MMMM 'de' yyyy"); 
          modelo.setRowCount(0);
-         
+         double total;
+         double iva;
+         double suma = 0;
          for (OrdenCompra c : i ) {
+            
+             total = c.getArticulo().getPrecio()*c.getCarrito();
+             iva = total * .16 + total;
+             suma += iva;
             modelo.addRow(new Object[]{
-            c.getId(),
+                c.getId(),
                 c.getFolio(),
                 c.getObservacion(),
                 formatter.format(c.getFecha()),
                 c.getProveedor().getNombre(),
                 c.getArticulo().getNombre(),
-                c.getArticulo().getPrecio(),
-                c.getCarrito()
-                    
-               
-                  
-                      
-
+                formatoCantidad.format(c.getArticulo().getPrecio()),
+                c.getCarrito(),
+                formatoCantidad.format(iva)       
             });
-     tblOrden.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
         }
+         NumberFormat formato = NumberFormat.getCurrencyInstance(local);
+         Locale localmx = new Locale("es", "MX");
+         DefaultTableModel modeloT = (DefaultTableModel)tblTotal.getModel();
+         modeloT.setRowCount(0);
+         
+         modeloT.addRow(new Object[]{
+                 formato.format(suma)
+                });
+            
     
 }
     /**
@@ -227,10 +322,17 @@ public void cargarTable(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnAbrir;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JMenuItem btnArticulos;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JMenuItem btnProveedores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblOrden;
+    private javax.swing.JTable tblTotal;
     // End of variables declaration//GEN-END:variables
 }

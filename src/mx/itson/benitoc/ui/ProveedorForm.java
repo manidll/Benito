@@ -74,6 +74,8 @@ int id;
 
         jLabel6.setText("Direccion");
 
+        btnGuardar.setBackground(new java.awt.Color(0, 102, 204));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

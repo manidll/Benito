@@ -12,7 +12,6 @@ import mx.itson.benito.entidades.OrdenCompra;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ArticuloDAO;
 import mx.itson.benito.persistencia.OrdenCompraDAO;
-import static mx.itson.benito.persistencia.OrdenCompraDAO.obtenerPorId;
 import mx.itson.benito.persistencia.ProveedorDAO;
 
 /**
@@ -41,17 +40,7 @@ int id = 0;
             txtCarrito.setText(o.getCarrito()+"");
             
           }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+         
         
     }
 
@@ -72,21 +61,17 @@ int id = 0;
     }
      }
      
+     public void cargarEstados(){
+         
+     }
      
-   
-    
-    
-    
-    
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cmbArticulo = new javax.swing.JComboBox<>();
+        cmbEstado = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         txtObservacion = new javax.swing.JTextField();
         txtFolio = new javax.swing.JTextField();
@@ -98,10 +83,18 @@ int id = 0;
         jLabel6 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         txtCarrito = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        cmbArticulo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Articulo");
+
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Folio:");
 
@@ -113,6 +106,8 @@ int id = 0;
 
         jLabel6.setText("Carrito");
 
+        btnGuardar.setBackground(new java.awt.Color(0, 102, 204));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,42 +115,42 @@ int id = 0;
             }
         });
 
+        jLabel7.setText("Estado de orden");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbArticulo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel1))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))))
-                            .addGap(1, 1, 1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(btnGuardar)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                                    .addComponent(jLabel1)
+                                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(63, 63, 63))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(btnGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,21 +167,25 @@ int id = 0;
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel5)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         pack();
@@ -199,6 +198,7 @@ int id = 0;
         int carrito = Integer.parseInt(txtCarrito.getText());
         Proveedor proveedor  = (Proveedor) cmbProveedor.getSelectedItem();
         Articulo articulo = (Articulo) cmbArticulo.getSelectedItem();
+        
         
         boolean resultado = this.id == 0?
                 OrdenCompraDAO.guardar(observacion, folio, fecha, proveedor, articulo, carrito):
@@ -213,6 +213,10 @@ int id = 0;
             dispose();
        }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +266,7 @@ int id = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Articulo> cmbArticulo;
+    private javax.swing.JComboBox<Articulo> cmbEstado;
     private javax.swing.JComboBox<Proveedor> cmbProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -269,6 +274,7 @@ int id = 0;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JTextField txtCarrito;
     private javax.swing.JTextField txtFolio;

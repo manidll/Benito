@@ -34,6 +34,10 @@ public class ProveedorListado extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        salir = new javax.swing.JMenu();
+        btnSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -55,6 +59,8 @@ public class ProveedorListado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProveedor);
 
+        btnEliminar.setBackground(new java.awt.Color(0, 102, 204));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +68,8 @@ public class ProveedorListado extends javax.swing.JFrame {
             }
         });
 
+        btnEditar.setBackground(new java.awt.Color(0, 102, 204));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +77,8 @@ public class ProveedorListado extends javax.swing.JFrame {
             }
         });
 
+        btnAgregar.setBackground(new java.awt.Color(0, 102, 204));
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,33 +86,56 @@ public class ProveedorListado extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx/itson/benito/icon/michelin.png"))); // NOI18N
+
+        salir.setText("Salir");
+
+        btnSalir.setText("Salir del Registro");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        salir.add(btnSalir);
+
+        jMenuBar1.add(salir);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnAgregar))
-                .addGap(27, 27, 27)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnEditar)
+                            .addComponent(btnAgregar))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -152,6 +185,12 @@ public class ProveedorListado extends javax.swing.JFrame {
       cargar();
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        OrdenCompraListado obj = new OrdenCompraListado();
+        obj.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     public void cargar(){
         List<Proveedor> p = ProveedorDAO.obtenerTodos();
@@ -212,7 +251,11 @@ public class ProveedorListado extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JMenuItem btnSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu salir;
     private javax.swing.JTable tblProveedor;
     // End of variables declaration//GEN-END:variables
 }

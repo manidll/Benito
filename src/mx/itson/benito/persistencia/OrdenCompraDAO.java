@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.OrdenCompra;
 import mx.itson.benito.entidades.Proveedor;
+import mx.itson.benito.enumeradores.Estado;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -84,7 +85,7 @@ public class OrdenCompraDAO {
         
            
            
-     public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito  ){
+     public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito ){
         boolean resultado  = false;
     try {
     Session session = HibernateUtil.getSessionFactory().openSession();

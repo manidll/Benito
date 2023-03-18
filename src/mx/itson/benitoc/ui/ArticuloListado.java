@@ -38,6 +38,10 @@ public class ArticuloListado extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        btnSalirArt = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -59,6 +63,8 @@ public class ArticuloListado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblArticulos);
 
+        btnAgregar.setBackground(new java.awt.Color(0, 102, 204));
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +72,8 @@ public class ArticuloListado extends javax.swing.JFrame {
             }
         });
 
+        btnEditar.setBackground(new java.awt.Color(0, 102, 204));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +81,8 @@ public class ArticuloListado extends javax.swing.JFrame {
             }
         });
 
+        btnEliminar.setBackground(new java.awt.Color(0, 102, 204));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,33 +90,54 @@ public class ArticuloListado extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx/itson/benito/icon/michelin.png"))); // NOI18N
+
+        jMenu1.setText("Salir");
+
+        btnSalirArt.setText("Salir del Registro");
+        btnSalirArt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirArtActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnSalirArt);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addGap(45, 45, 45)
                         .addComponent(btnEditar)
                         .addGap(48, 48, 48)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
-                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregar)
+                            .addComponent(btnEditar)
+                            .addComponent(btnEliminar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
@@ -116,7 +147,7 @@ public class ArticuloListado extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarTable();
-        
+        tblArticulos.removeColumn(tblArticulos.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -140,8 +171,26 @@ public class ArticuloListado extends javax.swing.JFrame {
        cargarTable();    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+           //Muestra una confirmacion al usuario preguntando si esta seguro que desea eliminar.
+      //Si confirma, se elimina el registro y se actualiza la tabla.
+      ArticuloDAO borrar = new ArticuloDAO ();
+      int renglon = tblArticulos.getSelectedRow();
+      int id = Integer.parseInt(tblArticulos.getModel().getValueAt(renglon, 0).toString());
+      
+      int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminarlo?");
+      if(confirmacion == 0){
+          borrar.eliminar(id);
+          JOptionPane.showMessageDialog(this, "Eliminado correctamente");
+      }else if(confirmacion == 1){
+      }
+      cargarTable();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnSalirArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirArtActionPerformed
+        OrdenCompraListado obj = new OrdenCompraListado();
+        obj.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirArtActionPerformed
 
     public void cargarTable(){
         
@@ -206,6 +255,10 @@ public class ArticuloListado extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JMenuItem btnSalirArt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblArticulos;
     // End of variables declaration//GEN-END:variables
