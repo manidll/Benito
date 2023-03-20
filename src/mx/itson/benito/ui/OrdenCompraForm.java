@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package mx.itson.benitoc.ui;
+package mx.itson.benito.ui;
 
 import java.util.Date;
 import java.util.List;
@@ -15,11 +15,12 @@ import mx.itson.benito.persistencia.OrdenCompraDAO;
 import mx.itson.benito.persistencia.ProveedorDAO;
 
 /**
- *
- * @author egarz
+ *  Formulario de las Ordenes de compra
+ * @author Emmanuel Rivas y Erick Garza
  */
 public class OrdenCompraForm extends javax.swing.JDialog {
 int id = 0;
+
     /**
      * Creates new form OrdenCompraFormulario
      */
@@ -43,27 +44,29 @@ int id = 0;
          
         
     }
-
+    
+    /**
+     * Carga todos los proveedores en el comboBox al editar en formulario
+     */
      public void CargarProveedores(){
           List<Proveedor> Proveedor  = ProveedorDAO.obtenerTodos();
         
         for(Proveedor p : Proveedor){
             cmbProveedor.addItem(p);
-    }
+        }
      }
      
-     
+     /**
+      * Carga todos los articulos en el comboBox al editar en formulario
+      */
      public void cargarArticulos(){
           List<Articulo> articulo  = ArticuloDAO.obtenerTodos();
         
         for(Articulo a : articulo){
             cmbArticulo.addItem(a);
-    }
+        }
      }
      
-     public void cargarEstados(){
-         
-     }
      
     
     @SuppressWarnings("unchecked")
@@ -90,11 +93,7 @@ int id = 0;
 
         jLabel1.setText("Articulo");
 
-        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEstadoActionPerformed(evt);
-            }
-        });
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abierta", "Cerrada" }));
 
         jLabel2.setText("Folio:");
 
@@ -198,11 +197,15 @@ int id = 0;
         int carrito = Integer.parseInt(txtCarrito.getText());
         Proveedor proveedor  = (Proveedor) cmbProveedor.getSelectedItem();
         Articulo articulo = (Articulo) cmbArticulo.getSelectedItem();
+        String estado = cmbEstado.getSelectedItem().toString();
         
-        
+         /**
+          * Guarda los registros escritos y muestra un information massage como mensaje de confirmacion, si no, 
+          * muestra un error massage para informar que hubo un error.
+          */
         boolean resultado = this.id == 0?
-                OrdenCompraDAO.guardar(observacion, folio, fecha, proveedor, articulo, carrito):
-                OrdenCompraDAO.editar(id, observacion, folio, fecha, proveedor, articulo, carrito);
+                OrdenCompraDAO.guardar(observacion, folio, fecha, proveedor, articulo, carrito, estado):
+                OrdenCompraDAO.editar(id, observacion, folio, fecha, proveedor, articulo, carrito, estado);
         
                       
          if(resultado){
@@ -213,10 +216,6 @@ int id = 0;
             dispose();
        }
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +265,7 @@ int id = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Articulo> cmbArticulo;
-    private javax.swing.JComboBox<Articulo> cmbEstado;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<Proveedor> cmbProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

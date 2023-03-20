@@ -15,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import mx.itson.benito.enumeradores.Estado;
+
 
 /**
  *
@@ -37,7 +37,7 @@ public class OrdenCompra {
     private int carrito;
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    private Estado estado;
+    private String estado;
 
     public int getId() {
         return id;
@@ -95,12 +95,14 @@ public class OrdenCompra {
         this.fecha = fecha;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
+
+   
     
 }

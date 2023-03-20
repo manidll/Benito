@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package mx.itson.benitoc.ui;
+package mx.itson.benito.ui;
 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -12,8 +12,8 @@ import mx.itson.benito.persistencia.ArticuloDAO;
 import mx.itson.benito.persistencia.ProveedorDAO;
 
 /**
- *
- * @author egarz
+ *  Formulario de la lista articulos
+ * @author Emmanuel Rivas y Erick Garza
  */
 public class ArticuloForm extends javax.swing.JDialog {
 int id;
@@ -34,21 +34,21 @@ int id;
           txtNombre.setText(a.getNombre());
           txtClave.setText(a.getClave());
           txtPrecio.setText(a.getPrecio()+"");
-          
-          
+  
       }
-        
-        
-        
+ 
     }
-    
+    /**
+     * Carga todos los proveedores en el comboBox al seleccionar la opcion editar
+     */
     public void CargarProveedores(){
         List<Proveedor> Proveedor  = ProveedorDAO.obtenerTodos();
         
         for(Proveedor p : Proveedor){
             cmbProveedores.addItem(p);
+         }
     }
-    }
+    
    public void cargarFormulario(){
           if(this.id != 0){
               
@@ -76,27 +76,9 @@ int id;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Nombre:");
-
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Articulo:");
 
         jLabel2.setText("Clave:");
-
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-
-        txtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClaveActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Precio:");
 
@@ -166,25 +148,17 @@ int id;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveActionPerformed
-
+    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String nombre = txtNombre.getText();
         String Clave = txtClave.getText();
         double precio  = Double.parseDouble(txtPrecio.getText());
         Proveedor proveedor  = (Proveedor) cmbProveedores.getSelectedItem();
        
-        
+        /**
+         * Guarda los registros escritos y muestra un information massage como mensaje de confirmacion, si no, 
+         * muestra un error massage para informar que hubo un error. 
+         */
                boolean resultado = this.id == 0 ?
                        ArticuloDAO.guardar(nombre, Clave, precio, proveedor):
                        ArticuloDAO.editar(id, Clave, precio, proveedor);

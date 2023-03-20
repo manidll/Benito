@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.itson.benitoc.ui;
+package mx.itson.benito.ui;
 
 import javax.swing.JOptionPane;
 import mx.itson.benito.entidades.Proveedor;
@@ -11,8 +11,8 @@ import mx.itson.benito.persistencia.ProveedorDAO;
 import static mx.itson.benito.persistencia.ProveedorDAO.obtenerPorId;
 
 /**
- *
- * @author mane0
+ *  Formulario de la lista de proveedores
+ * @author Emmanuel Rivas y Erick Garza
  */
 public class ProveedorForm extends javax.swing.JDialog {
 int id;
@@ -151,7 +151,10 @@ int id;
         String telefono = txtTelefono.getText();
         String correo = txtCorreo.getText();
         String direccion = txtDireccion.getText();
-        
+        /**
+         * Guarda los registros escritos y muestra un information massage como mensaje de confirmacion, si no, 
+         * muestra un error massage para informar que hubo un error.
+         */
         boolean resultado = this.id == 0 ?
                 ProveedorDAO.guardar(nombre, clave, contacto, telefono, correo, direccion):
                 ProveedorDAO.editar(id, nombre, clave, contacto, telefono, correo, direccion);

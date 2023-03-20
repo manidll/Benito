@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package mx.itson.benitoc.ui;
+package mx.itson.benito.ui;
 
-import java.awt.Color;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -15,15 +14,15 @@ import mx.itson.benito.entidades.OrdenCompra;
 import mx.itson.benito.persistencia.OrdenCompraDAO;
 
 /**
- *
- * @author egarz
+ *  Listado principal de las ordenes de compra
+ * @author Emmanuel Rivas y Erick Garza
  */
-public class OrdenCompraListado extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
 
     /**
      * Creates new form OrdenCompraListado
      */
-    public OrdenCompraListado() {
+    public Main() {
         initComponents();
     }
 
@@ -46,8 +45,8 @@ public class OrdenCompraListado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnAbrir = new javax.swing.JMenu();
-        btnArticulos = new javax.swing.JMenuItem();
-        btnProveedores = new javax.swing.JMenuItem();
+        mitArticulos = new javax.swing.JMenuItem();
+        mitProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -116,21 +115,21 @@ public class OrdenCompraListado extends javax.swing.JFrame {
 
         btnAbrir.setText("Abrir");
 
-        btnArticulos.setText("Articulos");
-        btnArticulos.addActionListener(new java.awt.event.ActionListener() {
+        mitArticulos.setText("Articulos");
+        mitArticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnArticulosActionPerformed(evt);
+                mitArticulosActionPerformed(evt);
             }
         });
-        btnAbrir.add(btnArticulos);
+        btnAbrir.add(mitArticulos);
 
-        btnProveedores.setText("Proveedores");
-        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+        mitProveedores.setText("Proveedores");
+        mitProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProveedoresActionPerformed(evt);
+                mitProveedoresActionPerformed(evt);
             }
         });
-        btnAbrir.add(btnProveedores);
+        btnAbrir.add(mitProveedores);
 
         jMenuBar1.add(btnAbrir);
 
@@ -188,8 +187,9 @@ public class OrdenCompraListado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       cargarTable();    
-    tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
+        cargarTable();
+        //Oculta al usuraio la primer columna, la cual corresponde a los id
+        tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
     
     }//GEN-LAST:event_formWindowOpened
 
@@ -201,7 +201,7 @@ public class OrdenCompraListado extends javax.swing.JFrame {
        if(seleccion == -1){
            JOptionPane.showMessageDialog(null, "Seleccione una fila porfavor");
        }
-       // Se obtiene el valor del id de conductor de la tabla
+       // Se obtiene el valor del id de la orden de compra de la tabla
        int renglon = tblOrden.getSelectedRow();
        String id = tblOrden.getModel().getValueAt(renglon, 0).toString();
        // Se abre el formulario y se le pasa el id como parámetro
@@ -216,7 +216,7 @@ public class OrdenCompraListado extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
   
-        //Muestra una confirmacion al usuario preguntando si esta seguro que desea eliminar.
+      //Muestra una confirmacion al usuario preguntando si esta seguro que desea eliminar.
       //Si confirma, se elimina el registro y se actualiza la tabla.
       OrdenCompraDAO borrar = new OrdenCompraDAO ();
       int renglon = tblOrden.getSelectedRow();
@@ -233,20 +233,26 @@ public class OrdenCompraListado extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticulosActionPerformed
+    private void mitArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitArticulosActionPerformed
+        // Menu item para entrar en el listado de Articulos
         ArticuloListado obj = new ArticuloListado();
         obj.setVisible(true);
         obj.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnArticulosActionPerformed
+    }//GEN-LAST:event_mitArticulosActionPerformed
 
-    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+    private void mitProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitProveedoresActionPerformed
+        // Menu item para entrar en el listado de Proveedores
         ProveedorListado obj = new ProveedorListado();
         obj.setVisible(true);
         obj.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnProveedoresActionPerformed
-public void cargarTable(){
+    }//GEN-LAST:event_mitProveedoresActionPerformed
+    
+    /**
+     * Carga todos los registros de la tabla mediante el metodo obtenerTodos y los muestra.
+     */
+    public void cargarTable(){
     
      List<OrdenCompra> i = OrdenCompraDAO.obtenerTodos();
          DefaultTableModel modelo =(DefaultTableModel)tblOrden.getModel();
@@ -271,7 +277,8 @@ public void cargarTable(){
                 c.getArticulo().getNombre(),
                 formatoCantidad.format(c.getArticulo().getPrecio()),
                 c.getCarrito(),
-                formatoCantidad.format(iva)       
+                formatoCantidad.format(iva),
+                c.getEstado()
             });
         }
          NumberFormat formato = NumberFormat.getCurrencyInstance(local);
@@ -302,21 +309,23 @@ public void cargarTable(){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OrdenCompraListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OrdenCompraListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OrdenCompraListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OrdenCompraListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OrdenCompraListado().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
@@ -324,14 +333,14 @@ public void cargarTable(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnAbrir;
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JMenuItem btnArticulos;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JMenuItem btnProveedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem mitArticulos;
+    private javax.swing.JMenuItem mitProveedores;
     private javax.swing.JTable tblOrden;
     private javax.swing.JTable tblTotal;
     // End of variables declaration//GEN-END:variables

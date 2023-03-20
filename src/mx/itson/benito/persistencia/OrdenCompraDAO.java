@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.OrdenCompra;
 import mx.itson.benito.entidades.Proveedor;
-import mx.itson.benito.enumeradores.Estado;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -38,7 +37,7 @@ public class OrdenCompraDAO {
              return ordeCompras;   
     }
     
-       public static boolean guardar (String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo, int carrito ){
+       public static boolean guardar (String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo, int carrito, String estado ){
    
         boolean resultado = false;
         try{
@@ -52,6 +51,7 @@ public class OrdenCompraDAO {
             o.setProveedor(proveedor);
             o.setArticulo(articulo);
             o.setCarrito(carrito);
+            o.setEstado(estado);
       
          
             
@@ -85,7 +85,7 @@ public class OrdenCompraDAO {
         
            
            
-     public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito ){
+     public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito, String estado ){
         boolean resultado  = false;
     try {
     Session session = HibernateUtil.getSessionFactory().openSession();
@@ -99,6 +99,7 @@ public class OrdenCompraDAO {
        ordenCompra.setProveedor(proveedor);
        ordenCompra.setArticulo(articulo);
        ordenCompra.setCarrito(carrito);
+       ordenCompra.setEstado(estado);
         
         
         session.saveOrUpdate(ordenCompra);
