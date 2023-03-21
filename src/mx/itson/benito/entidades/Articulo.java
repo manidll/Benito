@@ -15,8 +15,9 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author mane0
+ * @author Emmanuel Rivas y Erick Garza
  */
+
 @Entity
 public class Articulo {
     
@@ -30,6 +31,10 @@ public class Articulo {
     @JoinColumn(name = "idProveedor")
     private Proveedor proveedor;
 
+    /**
+     * Get and set Id
+     * @return id del articulo
+     */
     public int getId() {
         return id;
     }
@@ -38,6 +43,10 @@ public class Articulo {
         this.id = id;
     }
 
+    /**
+     * Get and set Nombre
+     * @return nombre del articulo
+     */
     public String getNombre() {
         return nombre;
     }
@@ -46,6 +55,10 @@ public class Articulo {
         this.nombre = nombre;
     }
 
+    /**
+     * Get and set Clave
+     * @return clave del articulo
+     */
     public String getClave() {
         return clave;
     }
@@ -54,6 +67,10 @@ public class Articulo {
         this.clave = clave;
     }
 
+    /**
+     * Get and set Precio
+     * @return precio del articulo
+     */
     public double getPrecio() {
         return precio;
     }
@@ -62,6 +79,10 @@ public class Articulo {
         this.precio = precio;
     }
 
+    /**
+     * Get and set Proveedor
+     * @return proveedor del articulo
+     */
     public Proveedor getProveedor() {
         return proveedor;
     }

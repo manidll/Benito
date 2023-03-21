@@ -12,10 +12,13 @@ import org.hibernate.service.ServiceRegistry;
 
 /**
  *
- * @author mane0
+ * @author Emmmanuel Rivas y Erick Garza
  */
 public class HibernateUtil {
-    
+  
+    /**
+     * 
+     */
   private static SessionFactory factory;
     private static ServiceRegistry serviceRegistry;
 
@@ -28,7 +31,7 @@ public class HibernateUtil {
                 System.out.println("No se pudo crear la sesión de Hibernate debido al error: "+ex);
         }
     }
-
+   
     public static SessionFactory getSessionFactory() {		
         return factory;
     }

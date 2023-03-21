@@ -18,10 +18,13 @@ import org.hibernate.Session;
 
 /**
  *
- * @author mane0
+ * @author Emmanuel Rivas y Erick Garza
  */
 public class OrdenCompraDAO {
-  
+    /**
+     * Obtiene todos los registros de tipo OrdenCompra de la base de datos
+     * @return Lista de tipo OrdenCompra de la base datos.
+     */
      public static List<OrdenCompra> obtenerTodos(){
         List<OrdenCompra> ordeCompras= new ArrayList<>();
         try{
@@ -36,7 +39,19 @@ public class OrdenCompraDAO {
         }
              return ordeCompras;   
     }
-    
+ 
+     /**
+      * Guarda un nuevo registro de tipo OrdenCompra de la base de datos
+      * @param observacion observaciones de la orden de compra
+      * @param folio folio de la orden de compra
+      * @param fecha fecha de generacion de la orden de compra
+      * @param proveedor proveedor del articulo en la orden de compra
+      * @param articulo articulo de la orden de compra
+      * @param carrito cantidad de articulos
+      * @param estado estado de la orden de compra
+      * @return Retorna true si el registro fue guardado correctamente; De lo contrario, retorna false
+      */
+     
        public static boolean guardar (String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo, int carrito, String estado ){
    
         boolean resultado = false;
@@ -67,7 +82,11 @@ public class OrdenCompraDAO {
         return resultado;
         
     }
-       
+       /**
+        * Obtiene los registros de tipo OrdenCompra por id en la base de datos
+        * @param id id de la orden de compra
+        * @return 
+        */
            public static OrdenCompra obtenerPorId(int id ){
         OrdenCompra ordenCompra = null;
         try {
@@ -82,9 +101,19 @@ public class OrdenCompraDAO {
         }
         return ordenCompra;
     }
-        
-           
-           
+      
+    /**
+     * Edita un registro de tipo OrdenCompra en la base de datos.
+     * @param id id de la orden de compra
+     * @param observacion observaciones de las ordenes de compra
+     * @param folio folio de las ordenes de compra
+     * @param fecha fecha de generacion de las ordenes de compra
+     * @param proveedor proveedores de las ordenes de compra
+     * @param articulo articulos de las ordenes de compra
+     * @param carrito cantidad de articulos de las ordenes de compra
+     * @param estado estado de las ordenes de compra
+     * @return El registro se edita en la base de datos
+     */       
      public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito, String estado ){
         boolean resultado  = false;
     try {
@@ -107,18 +136,20 @@ public class OrdenCompraDAO {
         resultado = true;
     }
     
-         
         } catch (HibernateException ex) {
             System.err.println("Ocurrio un error " + ex.getMessage());
-        
-           
+ 
         }
       return resultado;
 }
      
-     
-     public boolean eliminar (int id ){
-    boolean resultado  = false;
+     /**
+      * Elimina un registro de tipo OrdenCompra en la base de datos mediante id
+      * @param id id de la orden de compra
+      * @return El registro se elimina
+      */
+    public boolean eliminar (int id ){
+     boolean resultado  = false;
     
      try {
           Session session = HibernateUtil.getSessionFactory().openSession();

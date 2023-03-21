@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author mane0
+ * @author Emmanuel Rivas y Erick Garza
  */
 @Entity
 public class OrdenCompra {
@@ -39,6 +39,10 @@ public class OrdenCompra {
     private Date fecha;
     private String estado;
 
+    /**
+     * Get and set Id
+     * @return Id de la orden de compra
+     */
     public int getId() {
         return id;
     }
@@ -47,6 +51,10 @@ public class OrdenCompra {
         this.id = id;
     }
 
+    /**
+     * Get and set Folio
+     * @return Folio de la orden de compra
+     */
     public String getFolio() {
         return folio;
     }
@@ -55,6 +63,10 @@ public class OrdenCompra {
         this.folio = folio;
     }
 
+    /**
+     * Get and set Observacion
+     * @return Observacion de la orden de compra
+     */
     public String getObservacion() {
         return observacion;
     }
@@ -63,6 +75,10 @@ public class OrdenCompra {
         this.observacion = observacion;
     }
 
+    /**
+     * Get and set Proveedor
+     * @return Proveedor de la orden de compra
+     */
     public Proveedor getProveedor() {
         return proveedor;
     }
@@ -71,6 +87,10 @@ public class OrdenCompra {
         this.proveedor = proveedor;
     }
 
+    /**
+     * Get and set Articulo
+     * @return Articulo de la orden de compra
+     */
     public Articulo getArticulo() {
         return articulo;
     }
@@ -79,6 +99,10 @@ public class OrdenCompra {
         this.articulo = articulo;
     }
 
+    /**
+     * Get and set Carrito
+     * @return Cantidad de articulos de la orden de compra
+     */
     public int getCarrito() {
         return carrito;
     }
@@ -87,6 +111,10 @@ public class OrdenCompra {
         this.carrito = carrito;
     }
 
+    /**
+     * Get and set Fecha
+     * @return Fecha de generacion de la orden de compra
+     */
     public Date getFecha() {
         return fecha;
     }
@@ -95,6 +123,10 @@ public class OrdenCompra {
         this.fecha = fecha;
     }
 
+    /**
+     * Get and set Estado
+     * @return Estado de la orden de compra
+     */
     public String getEstado() {
         return estado;
     }

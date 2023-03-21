@@ -15,10 +15,14 @@ import org.hibernate.Session;
 
 /**
  *
- * @author mane0
+ * @author Emmanuel Rivas y Erick Garza
  */
 public class ProveedorDAO {
     
+    /**
+     * Obtiene todos los registros de tipo Proveedor de la base de datos
+     * @return Lista de tipo Proveedor de la base datos.
+     */
      public static List<Proveedor> obtenerTodos(){
         List<Proveedor> Proveedor = new ArrayList<>();
         try{
@@ -34,6 +38,17 @@ public class ProveedorDAO {
              return Proveedor;   
     }
     
+     /**
+      *  /**
+      * Guarda un nuevo registro de tipo Proveedor de la base de datos
+      * @param nombre nombre del proveedor (empresa)
+      * @param clave clave del proveedor
+      * @param contacto contacto del proveedor (trabajador)
+      * @param telefono telefono del contacto
+      * @param correo cprreo del proveedor
+      * @param direccion direccion del proveedor
+      * @return Retorna true si el registro fue guardado correctamente; De lo contrario, retorna false
+      */
        public static boolean guardar (String nombre, String clave, String contacto, String telefono, String correo, String direccion){
    
         boolean resultado = false;
@@ -48,9 +63,7 @@ public class ProveedorDAO {
             p.setTelefono(telefono);
             p.setCorreo(correo);
             p.setDireccion(direccion);
-         
-         
-            
+
             session.save(p);        
             session.getTransaction().commit();
             
@@ -64,6 +77,11 @@ public class ProveedorDAO {
         
     }
      
+       /**
+        * Obtiene los registros de tipo Proveedor por id en la base de datos
+        * @param id id del proveedor
+        * @return 
+        */
       public static Proveedor obtenerPorId(int id ){
         Proveedor proveedor = null;
         try {
@@ -79,7 +97,17 @@ public class ProveedorDAO {
         return proveedor;
     }
      
-         
+     /**
+      * Edita un registro de tipo Proveedor en la base de datos.
+      * @param id id del proveedor
+      * @param nombre nombre del proveedor (empresa)
+      * @param clave clave del proveedor
+      * @param contacto contacto del proveedor
+      * @param telefono telefono del proveedor
+      * @param correo correo del proveedor
+      * @param direccion direccion del proveedor
+      * @return El registro se edita en la base de datos
+      */    
      public  static boolean editar ( int id, String nombre, String clave, String contacto, String telefono, String correo, String direccion){
         boolean resultado  = false;
     try {
@@ -99,19 +127,19 @@ public class ProveedorDAO {
         resultado = true;
     }
     
-    
-            
         } catch (HibernateException ex) {
             System.err.println("Ocurrio un erro " + ex.getMessage());
         
            
         }
       return resultado;
-}
+    }
      
-     
-     
-     
+     /**
+      * Elimina un registro de tipo Proveedor en la base de datos mediante id
+      * @param id id del proveedor
+      * @return El registro se elimina
+      */
       public boolean eliminar (int id ){
     
     boolean resultado  = false;
@@ -125,9 +153,6 @@ public class ProveedorDAO {
         session.getTransaction().commit();
         resultado = true;
     }
-         
-         
-         
          
          } catch (HibernateException ex) {
             System.err.println("Ocurrio un erro " + ex.getMessage());

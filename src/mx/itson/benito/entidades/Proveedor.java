@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author mane0
+ * @author Emmanuel Rivas y Erick Garza
  */
 @Entity
 public class Proveedor {
@@ -26,6 +26,10 @@ public class Proveedor {
     private String correo;
     private String direccion;
 
+    /**
+     * Get and set Id
+     * @return Id del proveedor
+     */
     public int getId() {
         return id;
     }
@@ -34,6 +38,10 @@ public class Proveedor {
         this.id = id;
     }
 
+    /**
+     * Get and set Clave
+     * @return Clave del proveedor
+     */
     public String getClave() {
         return clave;
     }
@@ -42,6 +50,10 @@ public class Proveedor {
         this.clave = clave;
     }
 
+    /**
+     * Get and set Nombre
+     * @return Nombre del Proveedor (empresa)
+     */
     public String getNombre() {
         return nombre;
     }
@@ -50,6 +62,10 @@ public class Proveedor {
         this.nombre = nombre;
     }
 
+    /**
+     * Get and set Contacto
+     * @return Contacto del proveedor
+     */
     public String getContacto() {
         return contacto;
     }
@@ -58,6 +74,10 @@ public class Proveedor {
         this.contacto = contacto;
     }
 
+    /**
+     * Get and set Telefono
+     * @return Telefono del proveedor
+     */
     public String getTelefono() {
         return telefono;
     }
@@ -66,6 +86,10 @@ public class Proveedor {
         this.telefono = telefono;
     }
 
+    /**
+     * Get and set Correo
+     * @return Correo del proveedor 
+     */
     public String getCorreo() {
         return correo;
     }
@@ -74,6 +98,10 @@ public class Proveedor {
         this.correo = correo;
     }
 
+    /**
+     * Get and set Direccion
+     * @return Direccion del proveedor
+     */
     public String getDireccion() {
         return direccion;
     }

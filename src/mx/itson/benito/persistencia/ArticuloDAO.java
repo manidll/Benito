@@ -15,12 +15,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
- *
- * @author mane0
+ * 
+ * @author Emmanuel Rivas y Erick Garza
  */
 public class ArticuloDAO {
  
-    
+    /**
+     * Obtiene todos los registros de tipo Articulo de la base de datos
+     * @return Lista de tipo Articulo de la base datos.
+     */
      public static List<Articulo> obtenerTodos(){
         List<Articulo> articulos = new ArrayList<>();
         try{
@@ -36,7 +39,14 @@ public class ArticuloDAO {
              return articulos;   
     }
      
-     
+     /**
+      * Guarda un nuevo registro de tipo Articulo de la base de datos
+      * @param nombre nombre del articulo
+      * @param clave clave del articulo
+      * @param precio precio del articulo
+      * @param proveedor proveedor del articulo
+      * @return Retorna true si el registro fue guardado correctamente; De lo contrario, retorna false
+      */
          public static boolean guardar (String nombre, String clave, double precio, Proveedor proveedor){
    
         boolean resultado = false;
@@ -65,7 +75,11 @@ public class ArticuloDAO {
         
     }
          
-         
+         /**
+          * Obtiene los registros de tipo Articulo por id en la base de datos
+          * @param id del Articulo
+          * @return 
+          */
          public static Articulo obtenerPorId(int id ){
         Articulo articulo = null;
         try {
@@ -80,10 +94,15 @@ public class ArticuloDAO {
         }
         return articulo;
     }
-     
          
-         
-         
+         /**
+          * Edita un registro de tipo Articulo en la base de datos.
+          * @param id id del articulo
+          * @param clave clave del articulo
+          * @param precio precio del articulo
+          * @param proveedor proveedor del articulo
+          * @return El registro se edita en la base de datos
+          */
      public  static boolean editar ( int id, String clave, double precio, Proveedor proveedor){
         boolean resultado  = false;
     try {
@@ -110,9 +129,11 @@ public class ArticuloDAO {
       return resultado;
 }
      
-   
-     
-     
+     /**
+     * Elimina un registro de tipo Articulo en la base de datos mediante id
+     * @param id id del Articulo
+     * @return El registro se elimina
+     */
      public boolean eliminar (int id ){
     
     boolean resultado  = false;
@@ -126,10 +147,7 @@ public class ArticuloDAO {
         session.getTransaction().commit();
         resultado = true;
     }
-         
-         
-         
-         
+
          } catch (HibernateException ex) {
             System.err.println("Ocurrio un erro " + ex.getMessage());
         
