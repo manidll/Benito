@@ -63,7 +63,7 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Folio", "Observacion", "Fecha", "Proveedor", "Articulo", "Precio", "Carrito", "Subtotal", "Total", "Estado"
+                "Id", "Folio", "Fecha", "Proveedor", "Articulo", "Precio", "Carrito", "Subtotal", "Total", "Estado", "Observacion"
             }
         ));
         tblOrden.setGridColor(new java.awt.Color(0, 51, 153));
@@ -186,6 +186,7 @@ public class Main extends javax.swing.JFrame {
         OrdenCompraForm form = new OrdenCompraForm(this, true, 0);
         form.setVisible(true);
         cargarTable();
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -196,8 +197,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-     
-       
+
        int seleccion;
        seleccion = tblOrden.getSelectedRow();
        if(seleccion == -1){
@@ -210,10 +210,7 @@ public class Main extends javax.swing.JFrame {
        OrdenCompraForm formulario = new OrdenCompraForm(this, true, Integer.parseInt(id));
        formulario.setVisible(true);
        cargarTable(); 
-        
-        
-        
-        
+  
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -260,7 +257,7 @@ public class Main extends javax.swing.JFrame {
          DefaultTableModel modelo =(DefaultTableModel)tblOrden.getModel();
          Locale local = new Locale("es", "MX");
          NumberFormat formatoCarrito = NumberFormat.getCurrencyInstance(local);
-         SimpleDateFormat formatter = new SimpleDateFormat( "dd 'de' MMMM 'de' yyyy"); 
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
          modelo.setRowCount(0);
          double subtotal;
          double iva;
@@ -274,7 +271,6 @@ public class Main extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                 c.getId(),
                 c.getFolio(),
-                c.getObservacion(),
                 formatter.format(c.getFecha()),
                 c.getProveedor().getNombre(),
                 c.getArticulo().getNombre(),
@@ -282,7 +278,9 @@ public class Main extends javax.swing.JFrame {
                 c.getCarrito(),
                 formatoCarrito.format(subtotal),
                 formatoCarrito.format(iva),           
-                c.getEstado()
+                c.getEstado(),
+                c.getObservacion()
+                
             });
         }
          NumberFormat formato = NumberFormat.getCurrencyInstance(local);

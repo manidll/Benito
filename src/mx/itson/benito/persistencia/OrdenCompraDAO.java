@@ -52,7 +52,7 @@ public class OrdenCompraDAO {
       * @return Retorna true si el registro fue guardado correctamente; De lo contrario, retorna false
       */
      
-       public static boolean guardar (String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo, int carrito, String estado ){
+       public static boolean guardar (String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo, int carrito, String estado){
    
         boolean resultado = false;
         try{
@@ -67,6 +67,8 @@ public class OrdenCompraDAO {
             o.setArticulo(articulo);
             o.setCarrito(carrito);
             o.setEstado(estado);
+            
+            
       
          
             
@@ -114,7 +116,7 @@ public class OrdenCompraDAO {
      * @param estado estado de las ordenes de compra
      * @return El registro se edita en la base de datos
      */       
-     public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito, String estado ){
+     public  static boolean editar ( int id, String observacion, String folio, Date fecha, Proveedor proveedor ,  Articulo articulo,  int carrito, String estado){
         boolean resultado  = false;
     try {
     Session session = HibernateUtil.getSessionFactory().openSession();
@@ -129,6 +131,7 @@ public class OrdenCompraDAO {
        ordenCompra.setArticulo(articulo);
        ordenCompra.setCarrito(carrito);
        ordenCompra.setEstado(estado);
+       
         
         
         session.saveOrUpdate(ordenCompra);
