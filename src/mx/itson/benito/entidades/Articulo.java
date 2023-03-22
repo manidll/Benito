@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
- *
+ * Obtiene todo los registros de Articulo en la base de datos.
  * @author Emmanuel Rivas y Erick Garza
  */
 

@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 
 /**
- *
+ *  Obtiene todo los registros de orden de compra de la base de datos.
  * @author Emmanuel Rivas y Erick Garza
  */
 @Entity

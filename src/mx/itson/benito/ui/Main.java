@@ -57,13 +57,13 @@ public class Main extends javax.swing.JFrame {
 
         tblOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Folio", "Observacion", "Fecha", "Proveedor", "Articulo", "Precio", "Carrito", "Total", "Estado"
+                "Id", "Folio", "Observacion", "Fecha", "Proveedor", "Articulo", "Precio", "Carrito", "Subtotal", "Total", "Estado"
             }
         ));
         tblOrden.setGridColor(new java.awt.Color(0, 51, 153));
@@ -142,7 +142,6 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1247, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,7 +152,10 @@ public class Main extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(btnEditar)
                         .addGap(43, 43, 43)
-                        .addComponent(btnEliminar)))
+                        .addComponent(btnEliminar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -257,17 +259,18 @@ public class Main extends javax.swing.JFrame {
      List<OrdenCompra> i = OrdenCompraDAO.obtenerTodos();
          DefaultTableModel modelo =(DefaultTableModel)tblOrden.getModel();
          Locale local = new Locale("es", "MX");
-         NumberFormat formatoCantidad = NumberFormat.getCurrencyInstance(local);
+         NumberFormat formatoCarrito = NumberFormat.getCurrencyInstance(local);
          SimpleDateFormat formatter = new SimpleDateFormat( "dd 'de' MMMM 'de' yyyy"); 
          modelo.setRowCount(0);
-         double total;
+         double subtotal;
          double iva;
-         double suma = 0;
+         double total = 0;
          for (OrdenCompra c : i ) {
             
-             total = c.getArticulo().getPrecio()*c.getCarrito();
-             iva = total * .16 + total;
-             suma += iva;
+             subtotal = c.getArticulo().getPrecio() * c.getCarrito();
+             iva = subtotal * .16 + subtotal;
+             total += iva;
+             
             modelo.addRow(new Object[]{
                 c.getId(),
                 c.getFolio(),
@@ -275,19 +278,19 @@ public class Main extends javax.swing.JFrame {
                 formatter.format(c.getFecha()),
                 c.getProveedor().getNombre(),
                 c.getArticulo().getNombre(),
-                formatoCantidad.format(c.getArticulo().getPrecio()),
+                formatoCarrito.format(c.getArticulo().getPrecio()),
                 c.getCarrito(),
-                formatoCantidad.format(iva),
+                formatoCarrito.format(subtotal),
+                formatoCarrito.format(iva),           
                 c.getEstado()
             });
         }
          NumberFormat formato = NumberFormat.getCurrencyInstance(local);
-         Locale localmx = new Locale("es", "MX");
          DefaultTableModel modeloT = (DefaultTableModel)tblTotal.getModel();
          modeloT.setRowCount(0);
          
          modeloT.addRow(new Object[]{
-                 formato.format(suma)
+                 formato.format(total)
                 });
             
     

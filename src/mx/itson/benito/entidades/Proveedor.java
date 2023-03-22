@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *
+ * Obtiene todo los registros de Proveedor de la base de datos.
  * @author Emmanuel Rivas y Erick Garza
  */
 @Entity
